@@ -11,8 +11,8 @@ export default class Modal {
     document.addEventListener('keydown', this.closeEscPush);
   }
   open = () => {
-  document.body.append(this.elem);
-  document.body.classList.add("is-modal-open");
+    document.body.append(this.elem);
+    document.body.classList.add("is-modal-open");
   }
   setTitle = (modal_title) => {
     this.elem.querySelector('.modal__title').textContent = modal_title;
@@ -24,8 +24,8 @@ export default class Modal {
   }
 
   close = () => {
-      this.elem.remove();
-      document.body.classList.remove('is-modal-open');
+    this.elem.remove();
+    document.body.classList.remove('is-modal-open');
   }
   closeEscPush = (event) => {
     if(event.code === 'Escape'){

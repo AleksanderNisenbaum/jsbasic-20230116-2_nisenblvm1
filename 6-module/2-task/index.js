@@ -1,3 +1,5 @@
+import createElement from '../../assets/lib/create-element.js';
+
 export default class ProductCard {
   elem = null;
   #product = {}
@@ -6,24 +8,22 @@ export default class ProductCard {
   constructor(product) {
     this.#product = product;
 
-
-    this.#render();
+    this.elem = createElement(this.#template());
+    // this.#render();
 
     // this.elem.addEventListener('click', this.#onClick);
     this.elem.querySelector('.card__button').addEventListener('click', this.#onClick);
 
   }
   #onClick = () => {
-
-    console.log('clickkkkkkk');
-    console.log(this.#product.id);
+    // console.log(this.#product.id);
 
     let  myEvent = new CustomEvent("product-add", {
       detail: this.#product.id, // Уникальный идентификатора товара из объекта товара
       bubbles: true
     });
     document.querySelector('.card').dispatchEvent(myEvent);
-    // document.addEventListener('product-add', function(event){.....})
+
   }
 
 
@@ -42,15 +42,11 @@ export default class ProductCard {
       </div>`;
   }
 
-  #render() {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = this.#template();
-    this.elem = wrapper.firstElementChild;
-  }
-  // createElement(template) {
+  // #render() {
   //   const wrapper = document.createElement('div');
   //   wrapper.innerHTML = this.#template();
-  //   return wrapper.firstElementChild;
+  //   this.elem = wrapper.firstElementChild;
   // }
-  // this.elem = this.createElement(this.#template())
+
+
 }

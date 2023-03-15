@@ -5,6 +5,7 @@ export default class CartIcon {
     this.render();
 
     this.addEventListeners();
+
   }
 
   render() {
@@ -38,7 +39,42 @@ export default class CartIcon {
     window.addEventListener('resize', () => this.updatePosition());
   }
 
-  updatePosition() {
-    // ваш код ...
+  updatePosition = () => {
+    // ваш код ..
+    let initialTopCord =  this.elem.getBoundingClientRect().top + window.scrollY;
+    let isMobile = document.documentElement.clientWidth;
+
+    if (isMobile <= 767){
+      Object.assign(this.elem.style, {
+        position: '',
+        top: '',
+        left: '',
+        zIndex: ''
+      });
+    } else {
+      //50 костыль чтобы не глючило с initialTopCord это свойство->top 50px !!!
+      if (window.scrollY > 50) {
+        let leftIndent = Math.min(document.querySelector('.container').getBoundingClientRect().right + 20,
+          document.documentElement.clientWidth - this.elem.offsetWidth - 10
+        ) + 'px';
+
+        Object.assign(this.elem.style, {
+          position: 'fixed',
+          top: '50px',
+          zIndex: 1e3,
+          right: '10px',
+          left: leftIndent
+        });
+      } else {
+        // корзина сверху
+        Object.assign(this.elem.style, {
+          position: '',
+          top: '',
+          left: '',
+          zIndex: ''
+        });
+      }
+    }
+
   }
 }

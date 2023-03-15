@@ -35,14 +35,14 @@ export default class Carousel {
       console.log(slide.id);
 
       let myEvent = new CustomEvent("product-add", {
-         detail: slide.id, // Уникальный идентификатора товара из объекта товара
-         bubbles: true
-       });
+        detail: slide.id, // Уникальный идентификатора товара из объекта товара
+        bubbles: true
+      });
       this.elem.dispatchEvent(myEvent);
-       // document.querySelector('.carousel').dispatchEvent(myEvent);
+      // document.querySelector('.carousel').dispatchEvent(myEvent);
     }
 
-    }
+  }
 
   #moveCarousel = (event) => {
     let offsetWidth = this.elem.querySelector('.carousel__inner').offsetWidth;

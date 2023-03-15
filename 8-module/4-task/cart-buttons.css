@@ -4,7 +4,7 @@
 }
 
 .cart-buttons__button {
-  padding-right: 54px !important;
+  /*!*padding-right: 54px !important;*! я закоментил чтобы небыло отступа справа от текста кнопки order!!!*/
 }
 
 .cart-buttons__button:after {
@@ -46,4 +46,17 @@
   font-size: 20px;
   line-height: 1.2;
   font-weight: 500;
+}
+#myStyleFofbuttonSubmite {
+  height: 30px;
+  width: 80px;
+  margin-top: 5px;
+  border:  2px solid black;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+#myStyleFofbuttonSubmite:focus {
+  outline: 2px solid white;
+
 }

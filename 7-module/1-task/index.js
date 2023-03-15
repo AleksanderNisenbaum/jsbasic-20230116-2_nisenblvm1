@@ -36,10 +36,10 @@ export default class RibbonMenu {
       let promise = new Promise((resolve, reject) => {
         setTimeout(() => resolve(ribbonInner.scrollLeft), 450);
       });
-       let result = await promise;
-       console.log("scrollLeft " + result);
+      let result = await promise;
+      console.log("scrollLeft " + result);
 
-       let promise1 = new Promise((resolve, reject) => {
+      let promise1 = new Promise((resolve, reject) => {
         setTimeout(() => resolve(ribbonInner.scrollWidth - ribbonInner.scrollLeft - ribbonInner.clientWidth), 500);
       });
       let result1 = await promise1;
@@ -48,16 +48,16 @@ export default class RibbonMenu {
       let btnRight = document.querySelector('.ribbon__arrow_right');
       let btnLeft = document.querySelector('.ribbon__arrow_left');
 
-       if(result1 === 0){btnRight.classList.remove('ribbon__arrow_visible');
-         btnLeft.classList.add('ribbon__arrow_visible');
-       }
-       else if(result === 0){btnRight.classList.add('ribbon__arrow_visible');
-          btnLeft.classList.remove('ribbon__arrow_visible');
-       }
-       else{btnRight.classList.add('ribbon__arrow_visible');
-         btnLeft.classList.add('ribbon__arrow_visible');
-       }
-       }
+      if(result1 === 0){btnRight.classList.remove('ribbon__arrow_visible');
+        btnLeft.classList.add('ribbon__arrow_visible');
+      }
+      else if(result === 0){btnRight.classList.add('ribbon__arrow_visible');
+        btnLeft.classList.remove('ribbon__arrow_visible');
+      }
+      else{btnRight.classList.add('ribbon__arrow_visible');
+        btnLeft.classList.add('ribbon__arrow_visible');
+      }
+    }
     f();
   }
   #onClickLink = (event) => {
@@ -67,9 +67,9 @@ export default class RibbonMenu {
 
       let links = document.querySelectorAll('.ribbon__item');
       let arrayLinks = Array.from(links);
-      for (let i in arrayLinks){
+      for (let i in arrayLinks) {
         console.log(arrayLinks[i]);
-        if(arrayLinks[i].classList.contains('ribbon__item_active')){
+        if (arrayLinks[i].classList.contains('ribbon__item_active')) {
           arrayLinks[i].classList.remove('ribbon__item_active');
 
         }
@@ -78,6 +78,7 @@ export default class RibbonMenu {
       event.target.classList.add('ribbon__item_active');
 
       let category = event.target.dataset;
+      console.log("category.id-> " + category.id);
       let myEvent = new CustomEvent('ribbon-select', { // имя события должно быть именно 'ribbon-select'
         detail: category.id, // уникальный идентификатора категории из её объекта
         bubbles: true // это событие всплывает - это понадобится в дальнейшем

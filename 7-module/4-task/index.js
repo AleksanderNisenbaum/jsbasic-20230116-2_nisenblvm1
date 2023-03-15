@@ -5,8 +5,8 @@ export default class StepSlider {
   config = {};
 
   constructor({ steps, value = 0 }) {
-    this.config.steps = steps;
-    this.config.value = value;
+    this.steps = steps;
+    this.value = value;
 
     this.elem = createElement(this.#template());
 
@@ -23,10 +23,10 @@ export default class StepSlider {
      //все что ниже до конца функции это логика по отображению прогресса при нажатии без перетаскивания ползунка
      let left = event.clientX - this.elem.getBoundingClientRect().left;
      let leftRelative = left / this.elem.offsetWidth;
-     let segments = this.config.steps - 1;
+     let segments = this.steps - 1;
      let approximateValue = leftRelative * segments;
-     this.config.value = Math.round(approximateValue);
-     let valuePercents = this.config.value / segments * 100;
+     this.value = Math.round(approximateValue);
+     let valuePercents = this.value / segments * 100;
      console.log("значение в процентах для отображенеия позиции ползунка " + valuePercents);
 
      // let thumb = this.elem.querySelector('.slider__thumb');
@@ -37,24 +37,26 @@ export default class StepSlider {
      thumb.style.left = `${leftPercents}%`;
      progress.style.width = `${leftPercents}%`;
 
-     this.elem.querySelector('.slider__value').textContent = this.config.value;
+     this.elem.querySelector('.slider__value').textContent = this.value;
 
      let spans = document.querySelectorAll('.slider__steps span');
      let arrayLinks = Array.from(spans);
-     for (let i in arrayLinks){
+     for (let i in arrayLinks) {
        arrayLinks[i].classList.remove('slider__step-active');
      }
-     arrayLinks[this.config.value].classList.add('slider__step-active');
+     arrayLinks[this.value].classList.add('slider__step-active');
    }
 
    pointerUp = (event) => {
     this.elem.classList.remove('slider_dragging');
 
-      document.removeEventListener('pointermove', this.pointerMove);
-      document.pointerUp = null;
+    document.removeEventListener('pointermove', this.pointerMove);
+    document.pointerUp = null;
 
      let myEvent = new CustomEvent('slider-change', { // имя события должно быть именно 'slider-change'
-       detail: this.config.value, // значение 0, 1, 2, 3, 4
+
+       detail: this.value, // значение 0, 1, 2, 3, 4
+
        bubbles: true // событие всплывает - это понадобится в дальнейшем
      });
      this.elem.dispatchEvent(myEvent);
@@ -81,20 +83,21 @@ export default class StepSlider {
     thumb.style.left = `${leftPercents}%`;
     progress.style.width = `${leftPercents}%`;
 
-    let segments = this.config.steps - 1;
+    let segments = this.steps - 1;
     let approximateValue = leftRelative * segments;
 
-    this.config.value = Math.round(approximateValue);
-    console.log(this.config.value);
+    this.value = Math.round(approximateValue);
 
-    this.elem.querySelector('.slider__value').textContent = this.config.value;
+    console.log("Значение value " + this.value);
+
+    this.elem.querySelector('.slider__value').textContent = this.value;
 
     let spans = document.querySelectorAll('.slider__steps span');
     let arrayLinks = Array.from(spans);
     for (let i in arrayLinks){
       arrayLinks[i].classList.remove('slider__step-active');
     }
-    arrayLinks[this.config.value].classList.add('slider__step-active');
+    arrayLinks[this.value].classList.add('slider__step-active');
 
   };
 
@@ -112,19 +115,19 @@ export default class StepSlider {
     <!--Шаги слайдера-->
     <div class="slider__steps">
     <span class="slider__step-active"></span>
-       ${this.#spanCreate(this.config.steps - 1)}
+       ${this.#spanCreate(this.steps - 1)}
 
 
     </div>
   </div>`);
   }
 
-  #spanCreate(num){
+  #spanCreate(num) {
     let str = "";
-    while(num > 0){str += "<span></span>";
+    while (num > 0) {str += "<span></span>";
       num--;
     }
-    return(str);
+    return (str);
   }
 
 

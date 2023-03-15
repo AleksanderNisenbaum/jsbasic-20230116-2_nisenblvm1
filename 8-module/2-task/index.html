@@ -24,71 +24,71 @@
 </style>
 
 <body>
-  <div class="container controls">
-    <div class="controls__row">
-      <label class="subheading">
-        <input type="checkbox" data-no-nuts> No Nuts
-      </label>
-    </div>
-
-    <div class="controls__row">
-      <label class="subheading">
-        <input type="checkbox" data-vegetarian-only> Vegetarian Only
-      </label>
-    </div>
-
-    <div class="controls__row">
-      <label class="subheading">
-        <input type="checkbox" data-max-spiciness> Показать товары с максимальной остротой "2"
-      </label>
-    </div>
-
-    <div class="controls__row">
-      <label class="subheading">
-        <input type="checkbox" data-category> Показать товары категории "soups"
-      </label>
-    </div>
+<div class="container controls">
+  <div class="controls__row">
+    <label class="subheading">
+      <input type="checkbox" data-no-nuts> No Nuts
+    </label>
   </div>
 
-  <div class="container" id="container"></div>
+  <div class="controls__row">
+    <label class="subheading">
+      <input type="checkbox" data-vegetarian-only> Vegetarian Only
+    </label>
+  </div>
 
-  <script type="module">
-    import ProductGrid from './index.js';
-    import products from './products.js';
+  <div class="controls__row">
+    <label class="subheading">
+      <input type="checkbox" data-max-spiciness> Показать товары с максимальной остротой "2"
+    </label>
+  </div>
 
-    let productGrid = new ProductGrid(products);
+  <div class="controls__row">
+    <label class="subheading">
+      <input type="checkbox" data-category> Показать товары категории "soups"
+    </label>
+  </div>
+</div>
 
-    container.append(productGrid.elem);
+<div class="container" id="container"></div>
 
-    let noNutsControl = document.querySelector('[data-no-nuts]');
-    noNutsControl.addEventListener('change', () => {
-      productGrid.updateFilter({ noNuts: event.target.checked });
-    });
+<script type="module">
+  import ProductGrid from './index.js';
+  import products from './products.js';
 
-    let vegetarianOnlyControl = document.querySelector('[data-vegetarian-only]');
-    vegetarianOnlyControl.addEventListener('change', () => {
-      productGrid.updateFilter({ vegeterianOnly: event.target.checked });
-    });
+  let productGrid = new ProductGrid(products);
 
-    let maxSpicinessControl = document.querySelector('[data-max-spiciness]');
-    maxSpicinessControl.addEventListener('change', () => {
-      if (event.target.checked) {
-        productGrid.updateFilter({ maxSpiciness: 2 });
-      } else {
-        productGrid.updateFilter({ maxSpiciness: 4 });
-      }
-    });
+  container.append(productGrid.elem);
 
-    let categoryControl = document.querySelector('[data-category]');
-    categoryControl.addEventListener('change', () => {
-      if (event.target.checked) {
-        productGrid.updateFilter({ category: 'soups' });
-      } else {
-        productGrid.updateFilter({ category: '' });
-      }
-    });
+  let noNutsControl = document.querySelector('[data-no-nuts]');
+  noNutsControl.addEventListener('change', () => {
+    productGrid.updateFilter({ noNuts: event.target.checked });
+  });
 
-  </script>
+  let vegetarianOnlyControl = document.querySelector('[data-vegetarian-only]');
+  vegetarianOnlyControl.addEventListener('change', () => {
+    productGrid.updateFilter({ vegeterianOnly: event.target.checked });
+  });
+
+  let maxSpicinessControl = document.querySelector('[data-max-spiciness]');
+  maxSpicinessControl.addEventListener('change', () => {
+    if (event.target.checked) {
+      productGrid.updateFilter({ maxSpiciness: 2 });
+    } else {
+      productGrid.updateFilter({ maxSpiciness: 4 });
+    }
+  });
+
+  let categoryControl = document.querySelector('[data-category]');
+  categoryControl.addEventListener('change', () => {
+    if (event.target.checked) {
+      productGrid.updateFilter({ category: 'soups' });
+    } else {
+      productGrid.updateFilter({ category: '' });
+    }
+  });
+
+</script>
 </body>
 
 </html>
